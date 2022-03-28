@@ -1,6 +1,6 @@
 name: secure_shared_preferences
 description: Simple to use yet powerful package to encypt shared preferences in android and UserDefaults in iOS.
-version: 0.0.1-beta.01
+version: 0.0.2
 homepage: https://github.com/the-kool-sk/secure_shared_preferences
 repository: https://github.com/the-kool-sk/secure_shared_preferences
 
