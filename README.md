@@ -11,7 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-![Encryption is important](./encrypt_image.jpeg  "Just hide it!")
+![Encryption is important](https://github.com/the-kool-sk/secure_shared_preferences/blob/main/encrypt_image.jpeg  "Just hide it!")
 
 [![pub points](https://badges.bar/secure_shared_preferences/pub%20points)](https://pub.dev/packages/secure_shared_preferences/score)
 [![Pub](https://img.shields.io/pub/v/secure_shared_preferences)](https://pub.dev/packages/secure_shared_preferences)
