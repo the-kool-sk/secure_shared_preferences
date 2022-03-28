@@ -43,20 +43,7 @@ and the Flutter guide for
 
 ## Additional information
 #### Encryption flow chart
-```mermaid
-graph TD
-    A[Local key-val storage] --> B{Platform}
-    B -->|Android| C{Encrypted}
-    C --->|True| F[Encrypt using android stdlib.]
-    C --->|False| G[Std. android shared Pref]
-    B -->|Web| D{Encypted}
-    D-->|Yes| H[Std. web local storage]
-    D-->|No| I[Not supported yet]
-    B -->|iOS| E{Encrypted}
-    E-->|Yes| J[Generate Master Key]--> L[Save in iOS keychain]
-    -->|Save in keychain| M[Generate subkeys using AES-CBC Algo]-->|save subkeys| N[Encrypt key & value] --> O[save to NSUser defaults]
-    E-->|No| K[Save in NSUserDefaults]
-```
+![FlowChart](https://github.com/the-kool-sk/secure_shared_preferences/blob/main/flow_chart.png)
 #### Usage
 1. Save :
 ```
