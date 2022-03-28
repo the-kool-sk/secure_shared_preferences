@@ -38,8 +38,10 @@ know whether this package might be useful for them.
 ```
 
 ## Additional information
+```mermaid
 graph TD;
     A-->B;
     A-->C;
     B-->D;
     C-->D;
+```
