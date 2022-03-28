@@ -56,7 +56,6 @@ graph TD
     -->|Save in keychain| M[Generate subkeys using AES-CBC Algo]-->|save subkeys| N[Encrypt key & value] --> O[save to NSUser defaults]
     E-->|No| K[Save in NSUserDefaults]
 ```
-
 #### Usage
 1. Save :
 ```
@@ -68,7 +67,6 @@ graph TD
     await pref.putBool("boolKey", true, true);
     await pref.putStringList("listKey", ["S","K"], true);
 ```
-
 2. Fetch :
 ```
     var pref = await SecureSharedPref.getInstance();

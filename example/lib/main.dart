@@ -49,14 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(data ?? ""),
             MaterialButton(
               onPressed: _getData,
-              child: const Text("GetItBack"),
+              child: const Text("Get It Back"),
             )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _save,
-        tooltip: 'Increment',
+        tooltip: 'Save',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'secure_shared_pref_impl.dart';
 
+/// Singletone class to access local storage.
 class SecureSharedPref extends SuperSecureSharedPref {
   //String, int, bool, double, map, String List,
 
@@ -17,12 +18,16 @@ class SecureSharedPref extends SuperSecureSharedPref {
     _init();
   }
 
+  /// Method to get instance of class.
   static Future<SecureSharedPref> getInstance() async {
     var object = SecureSharedPref._();
     await object._init();
     return object;
   }
 
+  /// Method to get String from local storage
+  /// [key] -> Key which you have provided while setting
+  /// [isEncrypted] -> Flag which you have provided while encrypting
   Future<String?> getString(String key, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -51,6 +56,9 @@ class SecureSharedPref extends SuperSecureSharedPref {
     return null;
   }
 
+  /// Method to get String from local storage
+  /// [key] -> Key which you have provided while setting
+  /// [isEncrypted] -> Flag which you have provided while encrypting
   Future<int?> getInt(String key, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -83,6 +91,9 @@ class SecureSharedPref extends SuperSecureSharedPref {
     return 0;
   }
 
+  /// Method to get boolean from local storage
+  /// [key] -> Key which you have provided while setting
+  /// [isEncrypted] -> Flag which you have provided while encrypting
   Future<bool?> getBool(String key, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -113,6 +124,9 @@ class SecureSharedPref extends SuperSecureSharedPref {
     return null;
   }
 
+  /// Method to get double from local storage
+  /// [key] -> Key which you have provided while setting
+  /// [isEncrypted] -> Flag which you have provided while encrypting
   Future<double?> getDouble(String key, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -143,6 +157,9 @@ class SecureSharedPref extends SuperSecureSharedPref {
     return null;
   }
 
+  /// Method to get map from local storage
+  /// [key] -> Key which you have provided while setting
+  /// [isEncrypted] -> Flag which you have provided while encrypting
   Future<Map?> getMap(String key, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -173,6 +190,9 @@ class SecureSharedPref extends SuperSecureSharedPref {
     return null;
   }
 
+  /// Method to get StringList from local storage
+  /// [key] -> Key which you have provided while setting
+  /// [isEncrypted] -> Flag which you have provided while encrypting
   Future<List<String>> getStringList(String key, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -203,6 +223,10 @@ class SecureSharedPref extends SuperSecureSharedPref {
     return [];
   }
 
+  /// Method to set String in local storage
+  /// [key] -> Key for key-value pair
+  /// [isEncrypted] -> Flag whether to encrypt or not
+  /// [val] -> Value for key-value pair
   Future<void> putString(String key, String val, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -236,6 +260,10 @@ class SecureSharedPref extends SuperSecureSharedPref {
     }
   }
 
+  /// Method to set int in local storage
+  /// [key] -> Key for key-value pair
+  /// [isEncrypted] -> Flag whether to encrypt or not
+  /// [val] -> Value for key-value pair
   Future<void> putInt(String key, int val, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -269,6 +297,10 @@ class SecureSharedPref extends SuperSecureSharedPref {
     }
   }
 
+  /// Method to set boolean in local storage
+  /// [key] -> Key for key-value pair
+  /// [isEncrypted] -> Flag whether to encrypt or not
+  /// [val] -> Value for key-value pair
   Future<void> putBool(String key, bool val, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -301,10 +333,18 @@ class SecureSharedPref extends SuperSecureSharedPref {
     }
   }
 
+  /// Method to set map in local storage
+  /// [key] -> Key for key-value pair
+  /// [isEncrypted] -> Flag whether to encrypt or not
+  /// [val] -> Value for key-value pair
   Future<void> putMap(String key, Map val, bool isEncrypted) async {
     await putString(key, jsonEncode(val), isEncrypted);
   }
 
+  /// Method to set double in local storage
+  /// [key] -> Key for key-value pair
+  /// [isEncrypted] -> Flag whether to encrypt or not
+  /// [val] -> Value for key-value pair
   Future<void> putDouble(String key, double val, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -337,6 +377,10 @@ class SecureSharedPref extends SuperSecureSharedPref {
     }
   }
 
+  /// Method to set StringList in local storage
+  /// [key] -> Key for key-value pair
+  /// [isEncrypted] -> Flag whether to encrypt or not
+  /// [val] -> Value for key-value pair
   Future<void> putStringList(String key, List<String> val, bool isEncrypted) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
@@ -388,6 +432,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   }
 }
 
+/// Super class for utility methods.
 class SuperSecureSharedPref {
   FlutterSecureStorage? _secureStorage;
   late PackageInfo _packageInfo;
