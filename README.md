@@ -15,25 +15,31 @@ TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 
 ## Features
+![Encryption is important](./encrypt_image.jpeg  "Just hide it!")
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Simple to use yet powerful package to encypt shared preferences in android and UserDefaults in iOS.
+- You have an option to by pass encryption just by passing a ```bool```.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+1. add dependency in ``` pubspec.yaml``` file ```secure_shared_preferences:0.0.1-beta```
+2. add import  ```import 'package:secure_shared_preferences/secure_shared_preferences.dart';```
 
 ## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
+1. To save string data type to secure storage.
 ```dart
-const like = 'sample';
+    var pref = await SecureSharedPref.getInstance();
+    pref.putString("Key", "This is data I want to save to local storage", true);
+```
+1. To get string data type to secure storage.
+```dart
+    var pref = await SecureSharedPref.getInstance();
+    pref.getString("Key", true);
 ```
 
 ## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;

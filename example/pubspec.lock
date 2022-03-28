@@ -279,10 +279,10 @@ packages:
   secure_shared_preferences:
     dependency: "direct main"
     description:
-      path: "/Users/suraj/Documents/personal/secure_shared_preferences"
-      relative: false
+      path: ".."
+      relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.1-beta"
   shared_preferences:
     dependency: transitive
     description:
