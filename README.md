@@ -22,6 +22,7 @@ and the Flutter guide for
 - Supports ```String, int, bool, double, map and List<String>```.
 - Uses advance ```AES-CBC-128``` algorithm for encryption.
 - Encrypts both key and value.
+- Integration unit tests available [here](./example/integration_test/app_test.dart)
 
 ## Getting started
 
