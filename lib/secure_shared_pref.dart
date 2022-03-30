@@ -413,6 +413,12 @@ class SecureSharedPref extends SuperSecureSharedPref {
     }
   }
 
+  /// Method for deleting all data.
+  Future<void> clearAll() async {
+    await _sharedPreferences.clear();
+    await _secureStorage?.deleteAll();
+  }
+
   Future<List<Map<String, List<int>>>> _getEncrypterKeys() async {
     List<Map<String, List<int>>> list = List.empty(growable: true);
     String keyEncrypterSubKey = await getString(_packageInfo.packageName + keyCode, false) ?? "";
