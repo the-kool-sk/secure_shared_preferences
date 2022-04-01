@@ -26,19 +26,19 @@ and the Flutter guide for
 
 ## Getting started
 
-1. add dependency in ``` pubspec.yaml``` file ```secure_shared_preferences:0.0.1-beta```
+1. add dependency in ``` pubspec.yaml``` file ```secure_shared_preferences:0.0.4```
 2. add import  ```import 'package:secure_shared_preferences/secure_shared_preferences.dart';```
 
 ## Usage
 1. To save string data type to secure storage.
 ```dart
     var pref = await SecureSharedPref.getInstance();
-    pref.putString("Key", "This is data I want to save to local storage", true);
+    pref.putString("Key", "This is data I want to save to local storage", isEncrypted : true);
 ```
 1. To get string data type to secure storage.
 ```dart
     var pref = await SecureSharedPref.getInstance();
-    pref.getString("Key", true);
+    pref.getString("Key", isEncrypted : true);
 ```
 
 ## Additional information
@@ -48,20 +48,28 @@ and the Flutter guide for
 1. Save :
 ```
     var pref = await SecureSharedPref.getInstance();
-    await pref.putString("StringEncrypted", "This is my first string test", true);
-    await pref.putInt("key", 100, true);
-    await pref.putMap("mapKey", {"Hello":true}, true);
-    await pref.putDouble("doubleKey", 20.32, true);
-    await pref.putBool("boolKey", true, true);
-    await pref.putStringList("listKey", ["S","K"], true);
+    await pref.putString("StringEncrypted", "This is my first string test",isEncrypted: true);
+    await pref.putInt("key", 100, isEncrypted: true);
+    await pref.putMap("mapKey", {"Hello":true}, isEncrypted: true);
+    await pref.putDouble("doubleKey", 20.32, isEncrypted: true);
+    await pref.putBool("boolKey", true,isEncrypted:  true);
+    await pref.putStringList("listKey", ["S","K"], isEncrypted: true);
 ```
+First parameter is the 'key'
+Second parameter is the value
+Third parameter is whether you want to encrypt this key/value or not.
+
 2. Fetch :
 ```
     var pref = await SecureSharedPref.getInstance();
-    await pref.getString("StringEncrypted", true);
-    await pref.getInt("key", true);
-    await pref.getMap("mapKey", true);
-    await pref.getDouble("doubleKey", true);
-    await pref.getBool("boolKey",true);
-    await pref.getStringList("listKey", true);
+    await pref.getString("StringEncrypted", isEncrypted: true);
+    await pref.getInt("key", isEncrypted: true);
+    await pref.getMap("mapKey", isEncrypted: true);
+    await pref.getDouble("doubleKey", isEncrypted: true);
+    await pref.getBool("boolKey",isEncrypted: true);
+    await pref.getStringList("listKey", isEncrypted: true);
 ```
+First parameter is the 'key'
+Second parameter is whether you have encrypted this key/value or not.
+
+

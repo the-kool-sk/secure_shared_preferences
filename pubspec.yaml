@@ -1,6 +1,6 @@
 name: secure_shared_preferences
 description: Simple to use yet powerful package to encypt shared preferences in android and UserDefaults in iOS.
-version: 0.0.3
+version: 0.0.4
 homepage: https://medium.com/@surajprasannakulkarni/flutter-secured-shared-preferences-feb0e30272bf
 repository: https://github.com/the-kool-sk/secure_shared_preferences
 
