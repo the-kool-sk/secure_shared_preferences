@@ -64,12 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _save() async {
     var pref = await SecureSharedPref.getInstance();
-    pref.putString("StringEncrypted", "This is my first string test", true);
+    pref.putString("StringEncrypted", "This is my first string test", isEncrypted:true);
   }
 
   _getData() {
     SecureSharedPref.getInstance().then((value) {
-      value.getString("StringEncrypted", true).then((value) {
+      value.getString("StringEncrypted",isEncrypted: true).then((value) {
         setState(() {
           data = value.toString();
         });

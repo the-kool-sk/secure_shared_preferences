@@ -28,7 +28,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// Method to get String from local storage
   /// [key] -> Key which you have provided while setting
   /// [isEncrypted] -> Flag which you have provided while encrypting
-  Future<String?> getString(String key, bool isEncrypted) async {
+  Future<String?> getString(String key, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -40,15 +40,19 @@ class SecureSharedPref extends SuperSecureSharedPref {
             if (_getIntListFromString(value).length == 16) {
               String decoded = await _decrypt(value, keys.first);
               if (decoded == key) {
-                return await _decrypt(_sharedPreferences.getString(value) ?? "", keys.last);
+                return await _decrypt(
+                    _sharedPreferences.getString(value) ?? "", keys.last);
               }
             }
           }
         } else {
-          throw Exception("Failed to get data something is not correct, please report issue on github");
+          throw Exception(
+              "Failed to get data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       return _sharedPreferences.getString(key);
@@ -59,7 +63,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// Method to get String from local storage
   /// [key] -> Key which you have provided while setting
   /// [isEncrypted] -> Flag which you have provided while encrypting
-  Future<int?> getInt(String key, bool isEncrypted) async {
+  Future<int?> getInt(String key, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -75,15 +79,19 @@ class SecureSharedPref extends SuperSecureSharedPref {
               String decoded = await _decrypt(value, keys.first);
               if (decoded == key) {
                 print("decoded $decoded}");
-                return int.tryParse(await _decrypt(_sharedPreferences.getString(value) ?? "", keys.last));
+                return int.tryParse(await _decrypt(
+                    _sharedPreferences.getString(value) ?? "", keys.last));
               }
             }
           }
         } else {
-          throw Exception("Failed to get data something is not correct, please report issue on github");
+          throw Exception(
+              "Failed to get data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       return _sharedPreferences.getInt(key);
@@ -94,7 +102,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// Method to get boolean from local storage
   /// [key] -> Key which you have provided while setting
   /// [isEncrypted] -> Flag which you have provided while encrypting
-  Future<bool?> getBool(String key, bool isEncrypted) async {
+  Future<bool?> getBool(String key, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -104,19 +112,24 @@ class SecureSharedPref extends SuperSecureSharedPref {
         if (await _isMasterKeyAvailable()) {
           var keys = await _getEncrypterKeys();
           for (var value in _sharedPreferences.getKeys()) {
-            if (value.length >= 2 && _getIntListFromString(value).length == 16) {
+            if (value.length >= 2 &&
+                _getIntListFromString(value).length == 16) {
               String decoded = await _decrypt(value, keys.first);
               if (decoded == key) {
-                String result = await _decrypt(_sharedPreferences.getString(value) ?? "", keys.last);
+                String result = await _decrypt(
+                    _sharedPreferences.getString(value) ?? "", keys.last);
                 return result.parseBool();
               }
             }
           }
         } else {
-          throw Exception("Failed to get data something is not correct, please report issue on github");
+          throw Exception(
+              "Failed to get data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       return _sharedPreferences.getBool(key);
@@ -127,7 +140,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// Method to get double from local storage
   /// [key] -> Key which you have provided while setting
   /// [isEncrypted] -> Flag which you have provided while encrypting
-  Future<double?> getDouble(String key, bool isEncrypted) async {
+  Future<double?> getDouble(String key, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -140,16 +153,20 @@ class SecureSharedPref extends SuperSecureSharedPref {
             if (_getIntListFromString(value).length == 16) {
               String decoded = await _decrypt(value, keys.first);
               if (decoded == key) {
-                String result = await _decrypt(_sharedPreferences.getString(value) ?? "", keys.last);
+                String result = await _decrypt(
+                    _sharedPreferences.getString(value) ?? "", keys.last);
                 return double.tryParse(result);
               }
             }
           }
         } else {
-          throw Exception("Failed to get data something is not correct, please report issue on github");
+          throw Exception(
+              "Failed to get data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       return _sharedPreferences.getDouble(key);
@@ -160,7 +177,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// Method to get map from local storage
   /// [key] -> Key which you have provided while setting
   /// [isEncrypted] -> Flag which you have provided while encrypting
-  Future<Map?> getMap(String key, bool isEncrypted) async {
+  Future<Map?> getMap(String key, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -173,16 +190,20 @@ class SecureSharedPref extends SuperSecureSharedPref {
             if (_getIntListFromString(value).length == 16) {
               String decoded = await _decrypt(value, keys.first);
               if (decoded == key) {
-                String result = await _decrypt(_sharedPreferences.getString(value) ?? "", keys.last);
+                String result = await _decrypt(
+                    _sharedPreferences.getString(value) ?? "", keys.last);
                 return jsonDecode(result);
               }
             }
           }
         } else {
-          throw Exception("Failed to get data something is not correct, please report issue on github");
+          throw Exception(
+              "Failed to get data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       return jsonDecode(_sharedPreferences.getString(key) ?? "{}");
@@ -193,7 +214,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// Method to get StringList from local storage
   /// [key] -> Key which you have provided while setting
   /// [isEncrypted] -> Flag which you have provided while encrypting
-  Future<List<String>> getStringList(String key, bool isEncrypted) async {
+  Future<List<String>> getStringList(String key, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -206,16 +227,20 @@ class SecureSharedPref extends SuperSecureSharedPref {
             if (_getIntListFromString(value).length == 16) {
               String decoded = await _decrypt(value, keys.first);
               if (decoded == key) {
-                String result = await _decrypt(_sharedPreferences.getString(value) ?? "", keys.last);
+                String result = await _decrypt(
+                    _sharedPreferences.getString(value) ?? "", keys.last);
                 return _getStringListFromString(result);
               }
             }
           }
         } else {
-          throw Exception("Failed to get data something is not correct, please report issue on github");
+          throw Exception(
+              "Failed to get data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       return _sharedPreferences.getStringList(key) ?? [];
@@ -227,7 +252,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// [key] -> Key for key-value pair
   /// [isEncrypted] -> Flag whether to encrypt or not
   /// [val] -> Value for key-value pair
-  Future<void> putString(String key, String val, bool isEncrypted) async {
+  Future<void> putString(String key, String val, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -238,22 +263,30 @@ class SecureSharedPref extends SuperSecureSharedPref {
           final algorithm = _getAlgorithm();
 
           final encryptedKey = await algorithm.encrypt(key.codeUnits,
-              secretKey: SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!), nonce: keys.first[SuperSecureSharedPref.ivForKey]);
+              secretKey:
+                  SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.first[SuperSecureSharedPref.ivForKey]);
           final encryptedValue = await algorithm.encrypt(val.codeUnits,
-              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!), nonce: keys.last[SuperSecureSharedPref.ivForKey]);
-          _sharedPreferences.setString(encryptedKey.cipherText.toString(), encryptedValue.cipherText.toString());
+              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.last[SuperSecureSharedPref.ivForKey]);
+          _sharedPreferences.setString(encryptedKey.cipherText.toString(),
+              encryptedValue.cipherText.toString());
         } else {
-          if (await _isMasterKeyAvailable() && _areSubKeysAvailable() == false) {
+          if (await _isMasterKeyAvailable() &&
+              _areSubKeysAvailable() == false) {
             await _deleteMasterKey();
           }
           var masterKey = await _createMasterKey();
           await _saveMasterKeyToKeychain(masterKey);
-          await _generateAndSaveKeyAndValueSubKeys(await _getMasterKeyFromKeyChain());
-          putString(key, val, isEncrypted);
+          await _generateAndSaveKeyAndValueSubKeys(
+              await _getMasterKeyFromKeyChain());
+          putString(key, val, isEncrypted:isEncrypted);
           //throw Exception("Failed to save data something is not correct, please report issue on github");
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       _sharedPreferences.setString(key, val);
@@ -264,7 +297,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// [key] -> Key for key-value pair
   /// [isEncrypted] -> Flag whether to encrypt or not
   /// [val] -> Value for key-value pair
-  Future<void> putInt(String key, int val, bool isEncrypted) async {
+  Future<void> putInt(String key, int val, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -275,22 +308,31 @@ class SecureSharedPref extends SuperSecureSharedPref {
           final algorithm = _getAlgorithm();
 
           final encryptedKey = await algorithm.encrypt(key.codeUnits,
-              secretKey: SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!), nonce: keys.first[SuperSecureSharedPref.ivForKey]);
-          final encryptedValue = await algorithm.encrypt(val.toString().codeUnits,
-              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!), nonce: keys.last[SuperSecureSharedPref.ivForKey]);
+              secretKey:
+                  SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.first[SuperSecureSharedPref.ivForKey]);
+          final encryptedValue = await algorithm.encrypt(
+              val.toString().codeUnits,
+              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.last[SuperSecureSharedPref.ivForKey]);
           print("encryptedKey.cipherText ${encryptedKey.cipherText}");
-          _sharedPreferences.setString(encryptedKey.cipherText.toString(), encryptedValue.cipherText.toString());
+          _sharedPreferences.setString(encryptedKey.cipherText.toString(),
+              encryptedValue.cipherText.toString());
         } else {
-          if (await _isMasterKeyAvailable() && _areSubKeysAvailable() == false) {
+          if (await _isMasterKeyAvailable() &&
+              _areSubKeysAvailable() == false) {
             await _deleteMasterKey();
           }
           var masterKey = await _createMasterKey();
           await _saveMasterKeyToKeychain(masterKey);
-          await _generateAndSaveKeyAndValueSubKeys(await _getMasterKeyFromKeyChain());
-          putInt(key, val, isEncrypted);
+          await _generateAndSaveKeyAndValueSubKeys(
+              await _getMasterKeyFromKeyChain());
+          putInt(key, val, isEncrypted:isEncrypted);
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       _sharedPreferences.setInt(key, val);
@@ -301,7 +343,7 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// [key] -> Key for key-value pair
   /// [isEncrypted] -> Flag whether to encrypt or not
   /// [val] -> Value for key-value pair
-  Future<void> putBool(String key, bool val, bool isEncrypted) async {
+  Future<void> putBool(String key, bool val, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -312,21 +354,30 @@ class SecureSharedPref extends SuperSecureSharedPref {
           final algorithm = _getAlgorithm();
 
           final encryptedKey = await algorithm.encrypt(key.codeUnits,
-              secretKey: SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!), nonce: keys.first[SuperSecureSharedPref.ivForKey]);
-          final encryptedValue = await algorithm.encrypt(val.toString().codeUnits,
-              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!), nonce: keys.last[SuperSecureSharedPref.ivForKey]);
-          _sharedPreferences.setString(encryptedKey.cipherText.toString(), encryptedValue.cipherText.toString());
+              secretKey:
+                  SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.first[SuperSecureSharedPref.ivForKey]);
+          final encryptedValue = await algorithm.encrypt(
+              val.toString().codeUnits,
+              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.last[SuperSecureSharedPref.ivForKey]);
+          _sharedPreferences.setString(encryptedKey.cipherText.toString(),
+              encryptedValue.cipherText.toString());
         } else {
-          if (await _isMasterKeyAvailable() && _areSubKeysAvailable() == false) {
+          if (await _isMasterKeyAvailable() &&
+              _areSubKeysAvailable() == false) {
             await _deleteMasterKey();
           }
           var masterKey = await _createMasterKey();
           await _saveMasterKeyToKeychain(masterKey);
-          await _generateAndSaveKeyAndValueSubKeys(await _getMasterKeyFromKeyChain());
-          putBool(key, val, isEncrypted);
+          await _generateAndSaveKeyAndValueSubKeys(
+              await _getMasterKeyFromKeyChain());
+          putBool(key, val, isEncrypted:isEncrypted);
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       _sharedPreferences.setBool(key, val);
@@ -337,15 +388,15 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// [key] -> Key for key-value pair
   /// [isEncrypted] -> Flag whether to encrypt or not
   /// [val] -> Value for key-value pair
-  Future<void> putMap(String key, Map val, bool isEncrypted) async {
-    await putString(key, jsonEncode(val), isEncrypted);
+  Future<void> putMap(String key, Map val, {bool isEncrypted = false}) async {
+    await putString(key, jsonEncode(val),isEncrypted: isEncrypted);
   }
 
   /// Method to set double in local storage
   /// [key] -> Key for key-value pair
   /// [isEncrypted] -> Flag whether to encrypt or not
   /// [val] -> Value for key-value pair
-  Future<void> putDouble(String key, double val, bool isEncrypted) async {
+  Future<void> putDouble(String key, double val, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -356,21 +407,30 @@ class SecureSharedPref extends SuperSecureSharedPref {
           final algorithm = _getAlgorithm();
 
           final encryptedKey = await algorithm.encrypt(key.codeUnits,
-              secretKey: SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!), nonce: keys.first[SuperSecureSharedPref.ivForKey]);
-          final encryptedValue = await algorithm.encrypt(val.toString().codeUnits,
-              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!), nonce: keys.last[SuperSecureSharedPref.ivForKey]);
-          _sharedPreferences.setString(encryptedKey.cipherText.toString(), encryptedValue.cipherText.toString());
+              secretKey:
+                  SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.first[SuperSecureSharedPref.ivForKey]);
+          final encryptedValue = await algorithm.encrypt(
+              val.toString().codeUnits,
+              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.last[SuperSecureSharedPref.ivForKey]);
+          _sharedPreferences.setString(encryptedKey.cipherText.toString(),
+              encryptedValue.cipherText.toString());
         } else {
-          if (await _isMasterKeyAvailable() && _areSubKeysAvailable() == false) {
+          if (await _isMasterKeyAvailable() &&
+              _areSubKeysAvailable() == false) {
             await _deleteMasterKey();
           }
           var masterKey = await _createMasterKey();
           await _saveMasterKeyToKeychain(masterKey);
-          await _generateAndSaveKeyAndValueSubKeys(await _getMasterKeyFromKeyChain());
-          putDouble(key, val, isEncrypted);
+          await _generateAndSaveKeyAndValueSubKeys(
+              await _getMasterKeyFromKeyChain());
+          putDouble(key, val, isEncrypted:isEncrypted);
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       _sharedPreferences.setDouble(key, val);
@@ -381,7 +441,8 @@ class SecureSharedPref extends SuperSecureSharedPref {
   /// [key] -> Key for key-value pair
   /// [isEncrypted] -> Flag whether to encrypt or not
   /// [val] -> Value for key-value pair
-  Future<void> putStringList(String key, List<String> val, bool isEncrypted) async {
+  Future<void> putStringList(
+      String key, List<String> val, {bool isEncrypted = false}) async {
     _assetFunction(isEncrypted);
     if (isEncrypted) {
       if (Platform.isAndroid) {
@@ -392,21 +453,30 @@ class SecureSharedPref extends SuperSecureSharedPref {
           final algorithm = _getAlgorithm();
 
           final encryptedKey = await algorithm.encrypt(key.codeUnits,
-              secretKey: SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!), nonce: keys.first[SuperSecureSharedPref.ivForKey]);
-          final encryptedValue = await algorithm.encrypt(val.toString().codeUnits,
-              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!), nonce: keys.last[SuperSecureSharedPref.ivForKey]);
-          _sharedPreferences.setString(encryptedKey.cipherText.toString(), encryptedValue.cipherText.toString());
+              secretKey:
+                  SecretKey(keys.first[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.first[SuperSecureSharedPref.ivForKey]);
+          final encryptedValue = await algorithm.encrypt(
+              val.toString().codeUnits,
+              secretKey: SecretKey(keys.last[SuperSecureSharedPref.keyForKey]!),
+              nonce: keys.last[SuperSecureSharedPref.ivForKey]);
+          _sharedPreferences.setString(encryptedKey.cipherText.toString(),
+              encryptedValue.cipherText.toString());
         } else {
-          if (await _isMasterKeyAvailable() && _areSubKeysAvailable() == false) {
+          if (await _isMasterKeyAvailable() &&
+              _areSubKeysAvailable() == false) {
             await _deleteMasterKey();
           }
           var masterKey = await _createMasterKey();
           await _saveMasterKeyToKeychain(masterKey);
-          await _generateAndSaveKeyAndValueSubKeys(await _getMasterKeyFromKeyChain());
-          putStringList(key, val, isEncrypted);
+          await _generateAndSaveKeyAndValueSubKeys(
+              await _getMasterKeyFromKeyChain());
+          putStringList(key, val, isEncrypted:isEncrypted);
         }
       } else {
-        throw PlatformException(message: "Not Supported for ${Platform.operatingSystem} platform", code: "501");
+        throw PlatformException(
+            message: "Not Supported for ${Platform.operatingSystem} platform",
+            code: "501");
       }
     } else {
       _sharedPreferences.setStringList(key, val);
@@ -421,18 +491,24 @@ class SecureSharedPref extends SuperSecureSharedPref {
 
   Future<List<Map<String, List<int>>>> _getEncrypterKeys() async {
     List<Map<String, List<int>>> list = List.empty(growable: true);
-    String keyEncrypterSubKey = await getString(_packageInfo.packageName + keyCode, false) ?? "";
-    String valueEncrypterSubKey = await getString(_packageInfo.packageName + valueCode, false) ?? "";
+    String keyEncrypterSubKey =
+        await getString(_packageInfo.packageName + keyCode, isEncrypted:false) ?? "";
+    String valueEncrypterSubKey =
+        await getString(_packageInfo.packageName + valueCode, isEncrypted:false) ?? "";
     final intList = _getIntListFromString(keyEncrypterSubKey);
     Map<String, List<int>> keyEncrypterKeysList = {};
-    keyEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.ivForKey, () => intList.getRange(0, 16).toList());
-    keyEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.keyForKey, () => intList.getRange(16, 32).toList());
+    keyEncrypterKeysList.putIfAbsent(
+        SuperSecureSharedPref.ivForKey, () => intList.getRange(0, 16).toList());
+    keyEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.keyForKey,
+        () => intList.getRange(16, 32).toList());
     list.add(keyEncrypterKeysList);
 
     final valueIntList = _getIntListFromString(valueEncrypterSubKey);
     Map<String, List<int>> valueEncrypterKeysList = {};
-    valueEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.ivForKey, () => valueIntList.getRange(0, 16).toList());
-    valueEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.keyForKey, () => valueIntList.getRange(16, 32).toList());
+    valueEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.ivForKey,
+        () => valueIntList.getRange(0, 16).toList());
+    valueEncrypterKeysList.putIfAbsent(SuperSecureSharedPref.keyForKey,
+        () => valueIntList.getRange(16, 32).toList());
     list.add(valueEncrypterKeysList);
     return list;
   }
@@ -452,9 +528,12 @@ class SuperSecureSharedPref {
   SuperSecureSharedPref() {
     PackageInfo.fromPlatform().then((value) async {
       _packageInfo = value;
-      const AndroidOptions _androidOptions = AndroidOptions(encryptedSharedPreferences: true);
-      final IOSOptions _iosOptions = IOSOptions(accountName: value.packageName, synchronizable: false);
-      _secureStorage ??= FlutterSecureStorage(aOptions: _androidOptions, iOptions: _iosOptions);
+      const AndroidOptions _androidOptions =
+          AndroidOptions(encryptedSharedPreferences: true);
+      final IOSOptions _iosOptions =
+          IOSOptions(accountName: value.packageName, synchronizable: false);
+      _secureStorage ??= FlutterSecureStorage(
+          aOptions: _androidOptions, iOptions: _iosOptions);
       _init();
     });
   }
@@ -463,20 +542,31 @@ class SuperSecureSharedPref {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  List<String> _getStringListFromString(String result) => result.substring(1, result.length - 1).split(',').toList();
+  List<String> _getStringListFromString(String result) =>
+      result.substring(1, result.length - 1).split(',').toList();
 
   void _assetFunction(bool isEncrypted) {
-    assert(Platform.isAndroid || Platform.isIOS || isEncrypted,
-        throw PlatformException(message: "Encryption Not Supported for ${Platform.operatingSystem} platform", code: "501"));
+    assert(
+        Platform.isAndroid || Platform.isIOS || isEncrypted,
+        throw PlatformException(
+            message:
+                "Encryption Not Supported for ${Platform.operatingSystem} platform",
+            code: "501"));
   }
 
-  AesCbc _getAlgorithm() => AesCbc.with128bits(macAlgorithm: MacAlgorithm.empty);
+  AesCbc _getAlgorithm() =>
+      AesCbc.with128bits(macAlgorithm: MacAlgorithm.empty);
 
   List<int> _getIntListFromString(String keyEncrypterSubKey) =>
-      keyEncrypterSubKey.substring(1, keyEncrypterSubKey.length - 1).split(',').map((e) => int.tryParse(e) ?? 0).toList();
+      keyEncrypterSubKey
+          .substring(1, keyEncrypterSubKey.length - 1)
+          .split(',')
+          .map((e) => int.tryParse(e) ?? 0)
+          .toList();
 
   Future<String> _decrypt(String string, Map<String, List<int>> keys) async {
-    final box = SecretBox(_getIntListFromString(string), nonce: keys[ivForKey]!, mac: Mac.empty);
+    final box = SecretBox(_getIntListFromString(string),
+        nonce: keys[ivForKey]!, mac: Mac.empty);
     final secretKey = SecretKey(keys[keyForKey]!);
     final decrypted = await _getAlgorithm().decrypt(box, secretKey: secretKey);
     print("decrypted $decrypted");
@@ -489,8 +579,10 @@ class SuperSecureSharedPref {
 
   Future<String> _createMasterKey() async {
     final generator = Random.secure();
-    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    final masterKey = String.fromCharCodes(Iterable.generate(32, (_) => _chars.codeUnitAt(generator.nextInt(_chars.length))));
+    const _chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    final masterKey = String.fromCharCodes(Iterable.generate(
+        32, (_) => _chars.codeUnitAt(generator.nextInt(_chars.length))));
     return masterKey;
   }
 
@@ -499,7 +591,8 @@ class SuperSecureSharedPref {
   }
 
   _saveMasterKeyToKeychain(String masterKey) async {
-    await _secureStorage?.write(key: _packageInfo.packageName, value: masterKey);
+    await _secureStorage?.write(
+        key: _packageInfo.packageName, value: masterKey);
   }
 
   Future<String> _getMasterKeyFromKeyChain() async {
@@ -507,8 +600,10 @@ class SuperSecureSharedPref {
   }
 
   bool _areSubKeysAvailable() {
-    var keyKey = _sharedPreferences.getString(_packageInfo.packageName + keyCode);
-    var valueKey = _sharedPreferences.getString(_packageInfo.packageName + valueCode);
+    var keyKey =
+        _sharedPreferences.getString(_packageInfo.packageName + keyCode);
+    var valueKey =
+        _sharedPreferences.getString(_packageInfo.packageName + valueCode);
     return keyKey != null && valueKey != null;
   }
 
@@ -523,7 +618,8 @@ class SuperSecureSharedPref {
     final keyBytes = await secretKey.extractBytes();
     subKeyKey.addAll(nonce);
     subKeyKey.addAll(keyBytes);
-    await _sharedPreferences.setString(_packageInfo.packageName + keyCode, subKeyKey.toString());
+    await _sharedPreferences.setString(
+        _packageInfo.packageName + keyCode, subKeyKey.toString());
 
     // AES-CBC with 128 bit keys and HMAC-SHA256 authentication.
     final valueAlgorithm = AesCbc.with128bits(
@@ -535,6 +631,7 @@ class SuperSecureSharedPref {
     final keyBytesValue = await secretKeyValue.extractBytes();
     subKeyValue.addAll(nonceValue);
     subKeyValue.addAll(keyBytesValue);
-    await _sharedPreferences.setString(_packageInfo.packageName + valueCode, subKeyValue.toString());
+    await _sharedPreferences.setString(
+        _packageInfo.packageName + valueCode, subKeyValue.toString());
   }
 }
